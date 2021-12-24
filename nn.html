@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script src="brai.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Assassin</title>
+</head>
+
+<body>
+
+	<div id ="ne"></div>
+	
+	<script>
+		const net = new brain.NeuralNetwork()
+		const ne = document.getElementById("ne")
+
+net.train([{
+    input: {
+      r: 0.03,
+      g: 0.7,
+      b: 0.5
+    },
+    output: {
+      black: 1
+    }
+  },
+  {
+    input: {
+      r: 0.16,
+      g: 0.09,
+      b: 0.2
+    },
+    output: {
+      white: 1
+    }
+  },
+  {
+    input: {
+      r: 0.5,
+      g: 0.5,
+      b: 1.0
+    },
+    output: {
+      white: 1
+    }
+  }
+]);
+
+var output = net.run({
+  r: 1,
+  g: 0.4,
+  b: 0
+});
+
+console.log(output)
+
+		ne.innerHTML = brain.utilities.toSVG(net)
+
+	</script>
+
+
+</body>
+</html>
